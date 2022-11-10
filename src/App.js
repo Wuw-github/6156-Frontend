@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import AllMeetupPage from "./pages/AllMeetup";
+import NewMeetupPage from "./pages/NewMeetup";
+import FavoriteMeetupPage from "./pages/FavoriteMeetup";
+import Layout from "./components/layout/Layout";
+import AllBoardsPage from "./pages/boards/AllBoardPage";
+import BoardDetailPage from "./pages/boards/BoardDetailPage";
+import NewBoardPage from "./pages/boards/NewBoardPage";
+import UpdateBoardPage from "./pages/boards/UpdateBoardPage";
 
 function App() {
+  // localhost:3000/
+  // my-page.com/
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<AllMeetupPage />} />
+        <Route path="/new-meetup" element={<NewMeetupPage />} />
+        <Route path="/favorites" element={<FavoriteMeetupPage />} />
+        <Route path="/boards" element={<AllBoardsPage />} />
+        <Route path="/boards/:board_id" element={<BoardDetailPage />} />
+        <Route path="/boards/create" element={<NewBoardPage />} />
+        <Route path="/updateBoard" element={<UpdateBoardPage />} />
+      </Routes>
+    </Layout>
   );
 }
 

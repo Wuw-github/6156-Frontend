@@ -23,6 +23,9 @@ function MainNavigation() {
           <li>
             <Link to="/boards/create">New Board</Link>
           </li>
+          <li>
+            <Link to="/login">User</Link>
+          </li>
         </ul>
       </nav>
     </header>

@@ -11,12 +11,8 @@ export default function BoardList(props) {
     <div>
       {props.data.map((boardData) => {
         return (
-          <div>
-            <BoardItem
-              data={boardData}
-              showDetails={false}
-              key={boardData.request_id}
-            />
+          <div key={boardData.request_id}>
+            <BoardItem data={boardData} showDetails={false} />
             <button onClick={(e) => detailInfo(e, boardData.request_id)}>
               Details
             </button>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useToken from "../../api/useToken";
 
 export default function LoginForm({ setToken }) {
   const [email, setEmail] = useState();

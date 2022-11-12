@@ -9,17 +9,21 @@ export default function BoardDetailPage(props) {
   const [joined, setJoined] = useState(false);
   const [participantElement, setParticipantElement] = useState();
   const navigate = useNavigate();
-
   const { board_id } = useParams();
+
   useEffect(() => {
     fetch(`http://localhost:5011/requests/${board_id}`)
       .then((response) => {
+        if (!response.ok) throw new Error(response.status);
         return response.json();
       })
       .then((data) => {
         setLoadedBoard(data.data[0]);
+      })
+      .catch((error) => {
+        navigate("/boards");
       });
-  }, [board_id]);
+  }, [board_id, joined]);
 
   function updateHandler() {
     navigate("/updateBoard", { state: { id: board_id, data: loadedBoard } });
@@ -35,18 +39,29 @@ export default function BoardDetailPage(props) {
   function joinHandler() {
     fetch(`http://localhost:5011/requests/${board_id}/participants`, {
       method: "POST",
+      headers: { user_id: 5 },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          return response.text().then((text) => {
+            throw new Error(text);
+          });
+        }
+        response.json();
+      })
       .then((rsp) => {
         console.log(rsp);
         setJoined(true);
-        console.log(joined);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
   function leaveHandler() {
     fetch(`http://localhost:5011/requests/${board_id}/participants`, {
       method: "DELETE",
+      headers: { user_id: 5 },
     })
       .then((response) => response.json())
       .then((rsp) => {

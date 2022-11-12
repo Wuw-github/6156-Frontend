@@ -38,6 +38,7 @@ export default function NewBoardForm(props) {
     data.append("capacity", capacity);
 
     props.callBackend(data);
+    navigate(-1);
   }
 
   function cancelHandler(e) {
